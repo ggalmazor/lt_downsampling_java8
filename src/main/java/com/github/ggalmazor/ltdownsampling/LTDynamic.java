@@ -2,9 +2,9 @@ package com.github.ggalmazor.ltdownsampling;
 
 import javaslang.collection.Stream;
 
-public final class LTOB {
+public final class LTDynamic {
 
-  public static Stream<DataPoint> of(Iterable<DataPoint> input, int buckets) {
+  public static <T extends Number> Stream<T> sorted(Iterable<T> input, int buckets) {
     return Stream.ofAll(input);
   }
 }

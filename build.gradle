@@ -1,0 +1,12 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'io.javaslang:javaslang:2.0.2'
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.assertj:assertj-core:3.4.0'
+}
