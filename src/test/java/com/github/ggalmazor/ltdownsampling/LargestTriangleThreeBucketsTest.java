@@ -14,7 +14,7 @@ public class LargestTriangleThreeBucketsTest {
         Point.of(2, 0)
     );
 
-    List<Point> output = LTThreeBuckets.sorted(input, 1).toList();
+    List<Point> output = LTThreeBuckets.sorted(input, input.size(), 1).toList();
 
     assertThat(output).isEqualTo(input);
   }
@@ -34,7 +34,7 @@ public class LargestTriangleThreeBucketsTest {
         Point.of(3, 0)
     );
 
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, 1).toList();
+    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 1).toList();
 
     assertThat(actualOutput).isEqualTo(expectedOutput);
   }
@@ -54,7 +54,7 @@ public class LargestTriangleThreeBucketsTest {
         Point.of(3, 0)
     );
 
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, 1).toList();
+    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 1).toList();
 
     assertThat(actualOutput).isEqualTo(expectedOutput);
   }
@@ -68,7 +68,7 @@ public class LargestTriangleThreeBucketsTest {
         Point.of(3, 0)
     );
 
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, 2).toList();
+    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 2).toList();
 
     assertThat(actualOutput).isEqualTo(input);
   }
@@ -90,7 +90,31 @@ public class LargestTriangleThreeBucketsTest {
         Point.of(4, 5)
     );
 
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, 2).toList();
+    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 2).toList();
+
+    assertThat(actualOutput).isEqualTo(expectedOutput);
+  }
+
+  @Test
+  public void two_buckets_2() throws Exception {
+    List<Point> input = List.of(
+        Point.of(0, 0),
+        Point.of(1, 1),
+        Point.of(2, 3),
+        Point.of(3, 1),
+        Point.of(4, 3),
+        Point.of(5, 2),
+        Point.of(6, 0)
+    );
+
+    List<Point> expectedOutput = List.of(
+        Point.of(0, 0),
+        Point.of(2, 3),
+        Point.of(4, 3),
+        Point.of(6, 0)
+    );
+
+    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 2).toList();
 
     assertThat(actualOutput).isEqualTo(expectedOutput);
   }
@@ -102,6 +126,6 @@ public class LargestTriangleThreeBucketsTest {
         Point.of(1, 1),
         Point.of(2, 0)
     );
-    LTThreeBuckets.sorted(input, 2);
+    LTThreeBuckets.sorted(input, input.size(), 2);
   }
 }

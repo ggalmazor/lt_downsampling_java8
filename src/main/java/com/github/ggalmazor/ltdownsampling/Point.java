@@ -6,6 +6,7 @@ import java.math.MathContext;
 import java.util.Objects;
 
 public class Point {
+  private static final MathContext MC = MathContext.UNLIMITED;
   private final BigDecimal x;
   private final BigDecimal y;
 
@@ -19,32 +20,35 @@ public class Point {
   }
 
   private static BigDecimal toBigDecimal(Number number) {
-    return new BigDecimal(number.doubleValue(), MathContext.UNLIMITED);
+    return new BigDecimal(number.doubleValue(), MC);
   }
 
-  public BigDecimal getX() {
+  protected BigDecimal getX() {
     return x;
   }
 
-  public BigDecimal getY() {
+  protected BigDecimal getY() {
     return y;
   }
 
-  public Point add(Point other) {
-    BigDecimal newX = x.add(other.x);
-    BigDecimal newY = y.add(other.y);
+  protected Point add(Point other) {
     return new Point(
-        newX,
-        newY
+        x.add(other.x),
+        y.add(other.y)
     );
   }
 
-  public Point subtract(Point other) {
-    BigDecimal newX = x.subtract(other.x);
-    BigDecimal newY = y.subtract(other.y);
+  protected Point subtract(Point other) {
     return new Point(
-        newX,
-        newY
+        x.subtract(other.x),
+        y.subtract(other.y)
+    );
+  }
+
+  protected Point divide(Number divisor) {
+    return new Point(
+        x.divide(toBigDecimal(divisor), MC),
+        y.divide(toBigDecimal(divisor), MC)
     );
   }
 
@@ -65,12 +69,5 @@ public class Point {
   @Override
   public int hashCode() {
     return Objects.hash(x, y);
-  }
-
-  public Point divide(Number divisor) {
-    return new Point(
-        x.divide(toBigDecimal(divisor), MathContext.UNLIMITED),
-        y.divide(toBigDecimal(divisor), MathContext.UNLIMITED)
-    );
   }
 }
