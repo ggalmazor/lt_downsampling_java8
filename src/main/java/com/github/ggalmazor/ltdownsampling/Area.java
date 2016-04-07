@@ -14,7 +14,7 @@ class Area<T extends Point> implements Comparable<Area<T>> {
     this.value = value;
   }
 
-  public static <U extends Point> Area<U> ofTriangle(Point a, U b, Point c) {
+  static <U extends Point> Area<U> ofTriangle(Point a, U b, Point c) {
     // area of a triangle = |[Ax(By - Cy) + Bx(Cy - Ay) + Cx(Ay - By)] / 2|
     List<BigDecimal> addends = List.of(
         a.getX().multiply(b.getY().subtract(c.getY())),
@@ -28,7 +28,7 @@ class Area<T extends Point> implements Comparable<Area<T>> {
     return new Area<>(b, value);
   }
 
-  public T getGenerator() {
+  T getGenerator() {
     return generator;
   }
 

@@ -74,7 +74,7 @@ public class LargestTriangleThreeBucketsTest {
   }
 
   @Test
-  public void two_buckets() throws Exception {
+  public void two_buckets_non_full_middle_buckets() throws Exception {
     List<Point> input = List.of(
         Point.of(0, 0),
         Point.of(1, 1),
@@ -96,7 +96,7 @@ public class LargestTriangleThreeBucketsTest {
   }
 
   @Test
-  public void two_buckets_2() throws Exception {
+  public void two_buckets_full_middle_buckets() throws Exception {
     List<Point> input = List.of(
         Point.of(0, 0),
         Point.of(1, 1),
