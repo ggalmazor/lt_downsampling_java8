@@ -1,6 +1,24 @@
 # Largest-Triangle downsampling algorithm implementations for Java8
 
-Largest-Triangle Dynamic algorithm implementation following its definition from http://skemman.is/stream/get/1946/15343/37285/3/SS_MSthesis.pdf
+These implementations are based on the paper *"Downsampling Time Series for Visual Representation"* by Sveinn Steinarsson from the Faculty of Industrial Engineering, Mechanical Engineering and Computer Science University of Iceland (2013). You can read the paper [here](http://skemman.is/stream/get/1946/15343/37285/3/SS_MSthesis.pdf)
 
-Provided a sorted by position input ```Iterable<DataPoint>```  
- 
+The goal of Largest-Triangle downsampling algorithms for data visualization is to reduce the number of points in a number series without losing important visual features of the resulting graph. It is important to be aware that **these algorithms are not numerically correct**.
+
+## Largest-Triangle Three-Buckets
+
+This version of the algorithm groups numbers in same sized buckets and then selects from each bucket the point that produces the largest area with points on neighbour buckets.
+
+You can produce a downsampled version of an input series with: 
+
+```
+List<Point> input = List.of(...);
+int numberOfBuckets = 200;
+
+List<Point> output = LTThreeBuckets.ofSorted(input, numberOfBuckets);
+```
+
+First and last points of the original series are always in the output. Then, the rest are grouped into the defined amount of buckets and the algorithm chooses the best point from each bucket, resulting in a list of 202 elements.
+
+## Largest-Triangle Dynamic
+
+Not yet implemented
