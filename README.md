@@ -22,3 +22,10 @@ First and last points of the original series are always in the output. Then, the
 ## Largest-Triangle Dynamic
 
 Not yet implemented
+
+## Other java implementations you might want to check
+
+ - [drcrane/downsample](https://github.com/drcrane/downsample)
+ - [jvsdfx](https://apache.googlesource.com/incubator-geode/+/sga2/jvsdfx-mm/src/main/java/com/pivotal/chart/util/LargestTriangleThreeBuckets.java)
+ - [n52.io](http://www.programcreek.com/java-api-examples/index.php?source_dir=sensorweb-rest-api-master/timeseries-io/src/main/java/org/n52/io/generalize/LargestTriangleThreeBucketsGeneralizer.java)
+ - [lmgtfy](http://lmgtfy.com/?q=java+largest+triangle+three+buckets)
