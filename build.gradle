@@ -7,6 +7,9 @@ repositories {
 
 dependencies {
   compile 'io.javaslang:javaslang:2.0.2'
+
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.4.0'
+  testCompile 'org.openjdk.jmh:jmh-core:1.9.3'
+  testCompile 'org.openjdk.jmh:jmh-generator-annprocess:1.9.3'
 }
