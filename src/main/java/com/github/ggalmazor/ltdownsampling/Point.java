@@ -22,11 +22,11 @@ public class Point {
     return new BigDecimal(number.doubleValue(), MC);
   }
 
-  protected BigDecimal getX() {
+  public BigDecimal getX() {
     return x;
   }
 
-  protected BigDecimal getY() {
+  public  BigDecimal getY() {
     return y;
   }
 
