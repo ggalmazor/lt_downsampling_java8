@@ -7,6 +7,10 @@ import static com.github.ggalmazor.ltdownsampling.tools.CustomCollectors.sliding
 
 public final class LTThreeBuckets {
 
+  public static <T extends Point> List<T> sorted(List<T> input, int desiredBuckets) {
+    return sorted(input, input.size(), desiredBuckets);
+  }
+
   public static <T extends Point> List<T> sorted(List<T> input, int inputSize, int desiredBuckets) {
     List<T> results = new ArrayList<>();
 
