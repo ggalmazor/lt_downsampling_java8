@@ -1,8 +1,8 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import javaslang.Lazy;
-import javaslang.collection.Stream;
-import javaslang.control.Option;
+import io.vavr.Lazy;
+import io.vavr.collection.Stream;
+import io.vavr.control.Option;
 
 import java.util.function.Function;
 

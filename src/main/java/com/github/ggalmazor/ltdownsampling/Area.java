@@ -1,6 +1,6 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import javaslang.collection.List;
+import io.vavr.collection.List;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -9,7 +9,7 @@ class Area<T extends Point> implements Comparable<Area<T>> {
   private final T generator;
   private final BigDecimal value;
 
-  Area(T generator, BigDecimal value) {
+  private Area(T generator, BigDecimal value) {
     this.generator = generator;
     this.value = value;
   }

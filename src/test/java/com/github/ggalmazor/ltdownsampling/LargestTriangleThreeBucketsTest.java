@@ -1,6 +1,6 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import javaslang.collection.List;
+import io.vavr.collection.List;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

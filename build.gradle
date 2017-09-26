@@ -1,14 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-version='0.0.2'
+version='0.0.3'
 
 repositories {
   mavenCentral()
 }
 
 dependencies {
-  compile 'io.javaslang:javaslang:2.0.2'
+  compile 'io.vavr:vavr:0.9.1'
 
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.4.0'

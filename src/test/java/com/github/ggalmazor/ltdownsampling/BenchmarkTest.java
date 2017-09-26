@@ -1,7 +1,7 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import javaslang.collection.List;
-import javaslang.control.Try;
+import io.vavr.collection.List;
+import io.vavr.control.Try;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openjdk.jmh.annotations.Benchmark;

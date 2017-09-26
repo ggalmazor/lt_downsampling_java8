@@ -1,6 +1,5 @@
 package com.github.ggalmazor.ltdownsampling;
 
-
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;

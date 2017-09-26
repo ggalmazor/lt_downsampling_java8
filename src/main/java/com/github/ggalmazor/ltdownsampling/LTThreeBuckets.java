@@ -1,6 +1,6 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import javaslang.collection.List;
+import io.vavr.collection.List;
 
 import java.util.ArrayList;
 
