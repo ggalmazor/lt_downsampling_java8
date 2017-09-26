@@ -1,7 +1,8 @@
 package com.github.ggalmazor.ltdownsampling;
 
+import java.util.List;
 
-import io.vavr.collection.List;
+import static java.util.Comparator.comparing;
 
 class Triangle<T extends Point> {
   private final Bucket<T> left, center, right;
@@ -29,11 +30,10 @@ class Triangle<T extends Point> {
   }
 
   T getResult() {
-    T result = center.map(b -> Area.ofTriangle(
-        left.getResult(),
-        b,
-        right.getCenter()
-    )).maxBy(Area::compareTo).get()
+    T result = center.map(b -> Area.ofTriangle(left.getResult(), b, right.getCenter()))
+        .stream()
+        .max(comparing(Area::getValue))
+        .orElseThrow(() -> new RuntimeException("Can't obtain max area triangle"))
         .getGenerator();
     center.setResult(result);
     return result;

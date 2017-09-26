@@ -1,55 +1,57 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import io.vavr.Lazy;
-import io.vavr.collection.Stream;
-import io.vavr.control.Option;
-
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Function;
 
+import static java.util.stream.Collectors.toList;
+
 class Bucket<T extends Point> {
-  private final Stream<T> data;
-  private final Lazy<T> first;
-  private final Lazy<Point> center;
-  private final Lazy<T> last;
-  private Option<T> result = Option.none();
+  private final List<T> data;
+  private final T first;
+  private final T last;
+  private final Point center;
+  private T result = null;
 
-  private Bucket(Stream<T> data) {
+  private Bucket(List<T> data, T first, T last, Point center) {
     this.data = data;
-    this.first = Lazy.of(data::head);
-    this.last = Lazy.of(data::last);
-    this.center = Lazy.of(() -> first.get().add(last.get().subtract(first.get()).divide(2)));
+    this.first = first;
+    this.last = last;
+    this.center = center;
   }
 
-  static <U extends Point> Bucket<U> of(Iterable<U> ts) {
-    return new Bucket<>(Stream.ofAll(ts));
+  static <U extends Point> Bucket<U> of(List<U> us) {
+    U first = us.get(0);
+    U last = us.get(us.size() - 1);
+    Point center = first.add(last.subtract(first).divide(2));
+    return new Bucket<>(us, first, last, center);
   }
 
-  @SafeVarargs
-  static <U extends Point> Bucket<U> of(U... ts) {
-    return new Bucket<>(Stream.of(ts));
+  static <U extends Point> Bucket<U> of(U u) {
+    return new Bucket<>(Collections.singletonList(u), u, u, u);
   }
 
   T getResult() {
-    return result.getOrElse(first);
+    return result != null ? result : first;
   }
 
   void setResult(T result) {
-    this.result = Option.of(result);
+    this.result = result;
   }
 
   T getFirst() {
-    return first.get();
+    return first;
   }
 
   T getLast() {
-    return last.get();
+    return last;
   }
 
   Point getCenter() {
-    return center.get();
+    return center;
   }
 
-  <U> Stream<U> map(Function<T, U> mapper) {
-    return data.map(mapper);
+  <U> List<U> map(Function<T, U> mapper) {
+    return data.stream().map(mapper).collect(toList());
   }
 }

@@ -1,42 +1,37 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import io.vavr.Tuple2;
-import io.vavr.collection.List;
-import io.vavr.collection.Stream;
-
 import java.util.ArrayList;
+import java.util.List;
 
 class OnePassBucketizer {
 
-  static <T extends Point> List<Bucket<T>> bucketize(Iterable<T> input, int inputSize, int desiredBuckets) {
+  static <T extends Point> List<Bucket<T>> bucketize(List<T> input, int inputSize, int desiredBuckets) {
     int middleSize = inputSize - 2;
     int bucketSize = middleSize / desiredBuckets;
-    int rest = middleSize % desiredBuckets;
+    int lastBucketSize = middleSize % desiredBuckets;
 
     if (bucketSize == 0) {
       throw new IllegalArgumentException("Can't produce " + desiredBuckets + " buckets from an input series of " + (middleSize + 2) + " elements");
     }
 
-    java.util.List<Bucket<T>> buckets = new ArrayList<>();
-
-    Stream<T> s = Stream.ofAll(input);
+    List<Bucket<T>> buckets = new ArrayList<>();
 
     // Add first point as the only point in the first bucket
-    buckets.add(Bucket.of(s.head()));
-    s = s.tail();
+    buckets.add(Bucket.of(input.get(0)));
+
+    List<T> rest = input.subList(1, input.size() - 1);
 
     // Add middle buckets.
     // Last middle bucket gets the rest of points when inputSize is not a multiple of desiredBuckets
     while (buckets.size() < desiredBuckets + 1) {
-      int size = buckets.size() == desiredBuckets ? bucketSize + rest : bucketSize;
-      Tuple2<Stream<T>, Stream<T>> branches = s.splitAt(size);
-      buckets.add(Bucket.of(branches._1));
-      s = branches._2;
+      int size = buckets.size() == desiredBuckets ? bucketSize + lastBucketSize : bucketSize;
+      buckets.add(Bucket.of(rest.subList(0, size)));
+      rest = rest.subList(size, rest.size());
     }
 
     // Add last point as the only point in the last bucket
-    buckets.add(Bucket.of(s.head()));
+    buckets.add(Bucket.of(input.get(input.size() - 1)));
 
-    return List.ofAll(buckets);
+    return buckets;
   }
 }

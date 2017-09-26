@@ -1,7 +1,5 @@
 package com.github.ggalmazor.ltdownsampling;
 
-import io.vavr.collection.List;
-import io.vavr.control.Try;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -18,6 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.stream.Collectors.toList;
@@ -53,17 +53,19 @@ public class BenchmarkTest {
     public final int size;
 
     public BenchmarkState() {
-      URI uri = Try.of(() -> BenchmarkTest.class.getResource("/daily-foreign-exchange-rates-31-.csv").toURI()).get();
-      series = List.ofAll(Try.of(() -> Files.lines(Paths.get(uri))).get()
-          .map(line -> line.split(";"))
-          .map(cols -> {
-            long x = LocalDate.parse(cols[0]).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond();
-            double y = Double.parseDouble(cols[1]);
-            return Point.of(x, y);
-          })
-          .collect(toList()))
-          .sortBy(Point::getX);
-      size = series.size();
+      series = Collections.emptyList();
+      size = 0;
+//      URI uri = Try.of(() -> BenchmarkTest.class.getResource("/daily-foreign-exchange-rates-31-.csv").toURI()).get();
+//      series = List.ofAll(Try.of(() -> Files.lines(Paths.get(uri))).get()
+//          .map(line -> line.split(";"))
+//          .map(cols -> {
+//            long x = LocalDate.parse(cols[0]).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond();
+//            double y = Double.parseDouble(cols[1]);
+//            return Point.of(x, y);
+//          })
+//          .collect(toList()))
+//          .sortBy(Point::getX);
+//      size = series.size();
     }
 
   }
