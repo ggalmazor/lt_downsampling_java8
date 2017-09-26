@@ -2,6 +2,7 @@ package com.github.ggalmazor.ltdownsampling;
 
 import javaslang.collection.List;
 import javaslang.control.Try;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Mode;
@@ -24,6 +25,7 @@ import static java.util.stream.Collectors.toList;
 public class BenchmarkTest {
 
   @Test
+  @Ignore
   public void launchBenchmark() throws Exception {
     Options opt = new OptionsBuilder()
         // Specify which benchmarks to run.
