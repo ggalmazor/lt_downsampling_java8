@@ -1,4 +1,4 @@
-package com.github.ggalmazor.ltdownsampling.tools;
+package com.ggalmazor.ltdownsampling.tools;
 
 import java.util.List;
 import java.util.stream.Collector;
