@@ -88,7 +88,7 @@ public class LargestTriangleThreeBucketsTest {
 
         List<Point> expectedOutput = asList(
                 Point.of(0, 0),
-                Point.of(1, 1),
+                Point.of(2, 2),
                 Point.of(3, 1),
                 Point.of(4, 5)
         );
