@@ -1,4 +1,4 @@
-package com.github.ggalmazor.ltdownsampling.tools;
+package com.ggalmazor.ltdownsampling.tools;
 
 import java.util.*;
 import java.util.function.BiConsumer;

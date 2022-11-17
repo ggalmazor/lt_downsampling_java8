@@ -1,4 +1,4 @@
-package com.github.ggalmazor.ltdownsampling;
+package com.ggalmazor.ltdownsampling;
 
 import java.util.ArrayList;
 import java.util.List;
