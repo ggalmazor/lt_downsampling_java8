@@ -12,7 +12,6 @@ concurrency:
 
 jobs:
   test:
-    needs: [markdownlint-cli, yamllint]
     runs-on: ubuntu-latest
     name: Java ${{ matrix.java-version }}
     strategy:
