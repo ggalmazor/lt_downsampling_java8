@@ -13,26 +13,27 @@ class Bucket<T extends Point> {
   private final Point center;
   private T result = null;
 
-  private Bucket(List<T> data, T first, T last, Point center) {
+  private Bucket(List<T> data, T first, T last, Point center, T result) {
     this.data = data;
     this.first = first;
     this.last = last;
     this.center = center;
+    this.result = result;
   }
 
   static <U extends Point> Bucket<U> of(List<U> us) {
     U first = us.get(0);
     U last = us.get(us.size() - 1);
     Point center = first.add(last.subtract(first).half());
-    return new Bucket<>(us, first, last, center);
+    return new Bucket<>(us, first, last, center, first);
   }
 
   static <U extends Point> Bucket<U> of(U u) {
-    return new Bucket<>(Collections.singletonList(u), u, u, u);
+    return new Bucket<>(Collections.singletonList(u), u, u, u, u);
   }
 
   T getResult() {
-    return result != null ? result : first;
+    return result;
   }
 
   void setResult(T result) {

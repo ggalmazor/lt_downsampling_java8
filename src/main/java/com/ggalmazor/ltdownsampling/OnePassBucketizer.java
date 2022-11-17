@@ -10,9 +10,8 @@ class OnePassBucketizer {
     int bucketSize = middleSize / desiredBuckets;
     int remainingElements = middleSize % desiredBuckets;
 
-    if (bucketSize == 0) {
+    if (bucketSize == 0)
       throw new IllegalArgumentException("Can't produce " + desiredBuckets + " buckets from an input series of " + (middleSize + 2) + " elements");
-    }
 
     List<Bucket<T>> buckets = new ArrayList<>();
 

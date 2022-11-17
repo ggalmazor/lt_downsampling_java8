@@ -30,12 +30,10 @@ class Triangle<T extends Point> {
   }
 
   T getResult() {
-    T result = center.map(b -> Area.ofTriangle(left.getResult(), b, right.getCenter()))
+    return center.map(b -> Area.ofTriangle(left.getResult(), b, right.getCenter()))
       .stream()
       .max(comparing(Area::getValue))
       .orElseThrow(() -> new RuntimeException("Can't obtain max area triangle"))
       .getGenerator();
-    center.setResult(result);
-    return result;
   }
 }

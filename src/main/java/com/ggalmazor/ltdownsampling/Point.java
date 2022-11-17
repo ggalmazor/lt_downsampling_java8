@@ -15,11 +15,7 @@ public class Point {
   }
 
   public static Point of(Number x, Number y) {
-    return new Point(toBigDecimal(x), toBigDecimal(y));
-  }
-
-  private static BigDecimal toBigDecimal(Number number) {
-    return BigDecimal.valueOf(number.doubleValue());
+    return new Point(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()));
   }
 
   public BigDecimal getX() {

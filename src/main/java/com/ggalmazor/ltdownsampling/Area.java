@@ -5,7 +5,7 @@ import java.math.MathContext;
 import java.util.Arrays;
 import java.util.List;
 
-class Area<T extends Point> implements Comparable<Area<T>> {
+class Area<T extends Point> {
   private final T generator;
   private final BigDecimal value;
 
@@ -33,10 +33,5 @@ class Area<T extends Point> implements Comparable<Area<T>> {
 
   public BigDecimal getValue() {
     return value;
-  }
-
-  @Override
-  public int compareTo(Area<T> o) {
-    return value.compareTo(o.value);
   }
 }
