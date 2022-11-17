@@ -1,6 +1,5 @@
 .idea
 *.iml
 target
-gradle
 .gradle
 build
