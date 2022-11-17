@@ -47,6 +47,15 @@ You can translate your domain objects into Point instances and back or extend ha
 
 Not yet implemented
 
+## Example
+
+This is how a raw timeseries with ~5000 data points and downsampled versions (2000, 500, and 250 buckets) look like (graphed by AirTable)
+![image](https://user-images.githubusercontent.com/205913/202478853-180c56ff-41af-43b3-8830-6d51ac7cfbb3.png)
+![image](https://user-images.githubusercontent.com/205913/202478930-dd482a9f-0da1-4e6b-8537-f7a2fbe68991.png)
+![image](https://user-images.githubusercontent.com/205913/202478994-28ae49ff-6036-43d1-8000-6730a55f8a77.png)
+![image](https://user-images.githubusercontent.com/205913/202480858-51ef82fc-6432-4447-942a-65edfa82a742.png)
+
+
 ## Other java implementations you might want to check
 
  - [drcrane/downsample](https://github.com/drcrane/downsample)
