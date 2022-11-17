@@ -11,6 +11,12 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest:2.2'
 }
 
+group = 'com.ggalmazor'
+version = '0.0.7'
+description = 'lt_downsampling_java8'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
 tasks.named('test') {
     useJUnitPlatform()
 }

@@ -6,7 +6,7 @@ The goal of Largest-Triangle downsampling algorithms for data visualization is t
 
 ## Download
 
-Latest version: 0.0.6
+Latest version: 0.0.7
 
 You can add this library into your Maven/Gradle/SBT/Leiningen project thanks to JitPack.io. Follow the instructions [here](https://jitpack.io/#ggalmazor/lt_downsampling_java8).
 
@@ -22,7 +22,7 @@ allprojects {
 }
 	
 dependencies {
-  compile 'com.ggalmazor:lt_downsampling_java8:0.0.6'
+  compile 'com.ggalmazor:lt_downsampling_java8:0.0.7'
 }
 ```
 
