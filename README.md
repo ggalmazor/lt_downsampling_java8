@@ -20,9 +20,9 @@ allprojects {
     maven { url 'https://jitpack.io' }
   }
 }
-	
+
 dependencies {
-  compile 'com.ggalmazor:lt_downsampling_java8:0.0.7'
+  implementation 'com.github.ggalmazor:lt_downsampling_java8:0.0.7'
 }
 ```
 
@@ -30,7 +30,7 @@ dependencies {
 
 This version of the algorithm groups numbers in same sized buckets and then selects from each bucket the point that produces the largest area with points on neighbour buckets.
 
-You can produce a downsampled version of an input series with: 
+You can produce a downsampled version of an input series with:
 
 ```java
 List<Point> input = Arrays.asList(...);
