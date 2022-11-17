@@ -55,6 +55,12 @@ This is how a raw timeseries with ~5000 data points and downsampled versions (20
 ![image](https://user-images.githubusercontent.com/205913/202478994-28ae49ff-6036-43d1-8000-6730a55f8a77.png)
 ![image](https://user-images.githubusercontent.com/205913/202480858-51ef82fc-6432-4447-942a-65edfa82a742.png)
 
+These are closeups for 250, 500, 1000, and 2000 buckets with raw data in the back:
+![image](https://user-images.githubusercontent.com/205913/202486056-25a612b1-7294-4967-9714-000cfcd5177e.png)
+![image](https://user-images.githubusercontent.com/205913/202486255-b42f7e90-29fc-45f9-be54-f30b4a6d1e07.png)
+![image](https://user-images.githubusercontent.com/205913/202486337-b402dd24-44dd-4456-af3d-add931e7fbd7.png)
+![image](https://user-images.githubusercontent.com/205913/202486396-ff3772d3-ef69-4c69-b56c-4ac16964ed04.png)
+
 
 ## Other java implementations you might want to check
 
