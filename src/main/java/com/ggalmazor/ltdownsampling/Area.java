@@ -22,8 +22,7 @@ class Area<T extends Point> implements Comparable<Area<T>> {
       c.getX().multiply(a.getY().subtract(b.getY()))
     );
     BigDecimal sum = addends.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
-    BigDecimal half = sum
-      .divide(BigDecimal.valueOf(2), MathContext.UNLIMITED);
+    BigDecimal half = sum.divide(BigDecimal.valueOf(2), MathContext.UNLIMITED);
     BigDecimal value = half.abs();
     return new Area<>(b, value);
   }
