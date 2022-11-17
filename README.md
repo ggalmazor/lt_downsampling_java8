@@ -22,7 +22,7 @@ allprojects {
 }
 	
 dependencies {
-  compile 'com.github.ggalmazor:lt_downsampling_java8:0.0.6'
+  compile 'com.ggalmazor:lt_downsampling_java8:0.0.6'
 }
 ```
 
