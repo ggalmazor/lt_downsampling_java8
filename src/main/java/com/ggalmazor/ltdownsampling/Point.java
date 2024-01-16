@@ -6,50 +6,50 @@ import java.util.Objects;
 
 public class Point {
   private static final MathContext MC = MathContext.UNLIMITED;
-  private final BigDecimal x;
-  private final BigDecimal y;
+  private final double x;
+  private final double y;
 
-  public Point(BigDecimal x, BigDecimal y) {
+  public Point(double x, double y) {
     this.x = x;
     this.y = y;
   }
 
   public static Point of(Number x, Number y) {
-    return new Point(BigDecimal.valueOf(x.doubleValue()), BigDecimal.valueOf(y.doubleValue()));
+    return new Point(x.doubleValue(), y.doubleValue());
   }
 
-  public BigDecimal getX() {
+  public double getX() {
     return x;
   }
 
-  public BigDecimal getY() {
+  public double getY() {
     return y;
   }
 
   protected Point add(Point other) {
     return new Point(
-      x.add(other.x),
-      y.add(other.y)
+      x + other.x,
+      y + other.y
     );
   }
 
   protected Point subtract(Point other) {
     return new Point(
-      x.subtract(other.x),
-      y.subtract(other.y)
+      x - other.x,
+      y - other.y
     );
   }
 
   protected Point half() {
     return new Point(
-      x.divide(BigDecimal.valueOf(2), MC),
-      y.divide(BigDecimal.valueOf(2), MC)
+      x / 2,
+      y / 2
     );
   }
 
   @Override
   public String toString() {
-    return '(' + x.toString() + ',' + y.toString() + ')';
+    return '(' + Double.toString(x) + ',' + Double.toString(y) + ')';
   }
 
   @Override

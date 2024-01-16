@@ -1,14 +1,9 @@
 package com.ggalmazor.ltdownsampling;
 
-import static java.util.Arrays.asList;
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -17,9 +12,13 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
+
+import static java.util.Arrays.asList;
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LargestTriangleThreeBucketsTest {
   @Test
@@ -147,17 +146,17 @@ public class LargestTriangleThreeBucketsTest {
 
   class DateSeriesPoint extends Point {
     private final LocalDate date;
-    private final BigDecimal value;
+    private final double value;
 
-    public DateSeriesPoint(LocalDate date, BigDecimal value) {
-      super(BigDecimal.valueOf(date.atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond()), value);
+    public DateSeriesPoint(LocalDate date, double value) {
+      super((double) date.atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), value);
       this.date = date;
       this.value = value;
     }
 
     @Override
     public String toString() {
-      return String.format("%s\t%s", date.format(DateTimeFormatter.ISO_DATE), value.toPlainString());
+      return String.format("%s\t%s", date.format(DateTimeFormatter.ISO_DATE), value);
     }
   }
 
@@ -168,25 +167,25 @@ public class LargestTriangleThreeBucketsTest {
       .map(line -> line.split(";"))
       .map(cols -> {
         LocalDate date = LocalDate.parse(cols[0]);
-        BigDecimal value = BigDecimal.valueOf(Double.parseDouble(cols[1]));
+        double value = Double.parseDouble(cols[1]);
         return new DateSeriesPoint(date, value);
       })
       .sorted(comparing(Point::getX))
       .collect(toList());
 
     assertThat(LTThreeBuckets.sorted(series, 10), Matchers.contains(
-      new DateSeriesPoint(LocalDate.of(1979, 12, 31), new BigDecimal("1.726")),
-      new DateSeriesPoint(LocalDate.of(1981, 8, 10), new BigDecimal("2.571")),
-      new DateSeriesPoint(LocalDate.of(1982, 11, 8), new BigDecimal("2.596")),
-      new DateSeriesPoint(LocalDate.of(1985, 2, 25), new BigDecimal("3.453")),
-      new DateSeriesPoint(LocalDate.of(1985, 9, 18), new BigDecimal("2.907")),
-      new DateSeriesPoint(LocalDate.of(1987, 12, 31), new BigDecimal("1.571")),
-      new DateSeriesPoint(LocalDate.of(1991, 2, 11), new BigDecimal("1.445")),
-      new DateSeriesPoint(LocalDate.of(1992, 9, 2), new BigDecimal("1.391")),
-      new DateSeriesPoint(LocalDate.of(1995, 3, 7), new BigDecimal("1.374")),
-      new DateSeriesPoint(LocalDate.of(1995, 4, 19), new BigDecimal("1.357")),
-      new DateSeriesPoint(LocalDate.of(1997, 8, 5), new BigDecimal("1.881")),
-      new DateSeriesPoint(LocalDate.of(1998, 12, 31), new BigDecimal("1.667"))
+      new DateSeriesPoint(LocalDate.of(1979, 12, 31), Double.parseDouble("1.726")),
+      new DateSeriesPoint(LocalDate.of(1981, 8, 10), Double.parseDouble("2.571")),
+      new DateSeriesPoint(LocalDate.of(1982, 11, 8), Double.parseDouble("2.596")),
+      new DateSeriesPoint(LocalDate.of(1985, 2, 25), Double.parseDouble("3.453")),
+      new DateSeriesPoint(LocalDate.of(1985, 9, 18), Double.parseDouble("2.907")),
+      new DateSeriesPoint(LocalDate.of(1987, 12, 31), Double.parseDouble("1.571")),
+      new DateSeriesPoint(LocalDate.of(1991, 2, 11), Double.parseDouble("1.445")),
+      new DateSeriesPoint(LocalDate.of(1992, 9, 2), Double.parseDouble("1.391")),
+      new DateSeriesPoint(LocalDate.of(1995, 3, 7), Double.parseDouble("1.374")),
+      new DateSeriesPoint(LocalDate.of(1995, 4, 19), Double.parseDouble("1.357")),
+      new DateSeriesPoint(LocalDate.of(1997, 8, 5), Double.parseDouble("1.881")),
+      new DateSeriesPoint(LocalDate.of(1998, 12, 31), Double.parseDouble("1.667"))
     ));
   }
 }
