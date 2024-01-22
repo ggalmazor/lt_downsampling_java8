@@ -4,65 +4,27 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Objects;
 
-public class Point {
-  private static final MathContext MC = MathContext.UNLIMITED;
-  private final double x;
-  private final double y;
+public interface Point {
+  double getX();
+  double getY();
 
-  public Point(double x, double y) {
-    this.x = x;
-    this.y = y;
+  static DoublePoint add(Point a, Point b) {
+    return new DoublePoint(
+      a.getX() + b.getX(),
+       a.getY() + b.getY()
+    );
   }
-
-  public static Point of(Number x, Number y) {
-    return new Point(x.doubleValue(), y.doubleValue());
-  }
-
-  public double getX() {
-    return x;
-  }
-
-  public double getY() {
-    return y;
-  }
-
-  protected Point add(Point other) {
-    return new Point(
-      x + other.x,
-      y + other.y
+  static DoublePoint subtract(Point a, Point b) {
+    return new DoublePoint(
+      a.getX() - b.getX(),
+      a.getY() - b.getY()
     );
   }
 
-  protected Point subtract(Point other) {
-    return new Point(
-      x - other.x,
-      y - other.y
+  static DoublePoint half(Point p) {
+    return new DoublePoint(
+      p.getX() / 2,
+      p.getY() / 2
     );
-  }
-
-  protected Point half() {
-    return new Point(
-      x / 2,
-      y / 2
-    );
-  }
-
-  @Override
-  public String toString() {
-    return '(' + Double.toString(x) + ',' + Double.toString(y) + ')';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Point point = (Point) o;
-    return Objects.equals(x, point.x) &&
-      Objects.equals(y, point.y);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(x, y);
   }
 }

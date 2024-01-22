@@ -1,6 +1,5 @@
 package com.ggalmazor.ltdownsampling;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -10,154 +9,133 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static com.ggalmazor.ltdownsampling.PointMatcher.pointAt;
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LargestTriangleThreeBucketsTest {
   @Test
   public void one_bucket_with_one_point_produces_that_point() {
-    List<Point> input = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(2, 0)
+    List<DoublePoint> input = asList(
+      DoublePoint.of(0, 0),
+      DoublePoint.of(1, 1),
+      DoublePoint.of(2, 0)
     );
 
-    List<com.ggalmazor.ltdownsampling.Point> output = LTThreeBuckets.sorted(input, input.size(), 1);
+    List<DoublePoint> output = LTThreeBuckets.sorted(input, input.size(), 1);
+
+    assertThat(output, contains(
+      pointAt(0, 0),
+      pointAt(1, 1),
+      pointAt(2, 0)
+    ));
+  }
+
+  @Test
+  public void one_bucket_with_two_points_with_same_area_produces_the_first_point() {
+    List<DoublePoint> input = asList(
+      DoublePoint.of(0, 0),
+      DoublePoint.of(1, 1),
+      DoublePoint.of(2, -1),
+      DoublePoint.of(3, 0)
+    );
+
+    List<DoublePoint> output = LTThreeBuckets.sorted(input, input.size(), 1);
+
+    assertThat(output, contains(
+      pointAt(0, 0),
+      pointAt(1, 1),
+      pointAt(3, 0)
+    ));
+  }
+
+  @Test
+  public void one_bucket_with_two_points_with_different_area_produces_the_point_that_generates_max_area() {
+    List<DoublePoint> input = asList(
+      DoublePoint.of(0, 0),
+      DoublePoint.of(1, 1),
+      DoublePoint.of(2, 2),
+      DoublePoint.of(3, 0)
+    );
+
+    List<DoublePoint> actualOutput = LTThreeBuckets.sorted(input, input.size(), 1);
+
+    assertThat(actualOutput, contains(
+      pointAt(0, 0),
+      pointAt(2, 2),
+      pointAt(3, 0)
+    ));
+  }
+
+  @Test
+  public void two_buckets_with_one_point_each() {
+    List<DoublePoint> input = asList(
+      DoublePoint.of(0, 0),
+      DoublePoint.of(1, 1),
+      DoublePoint.of(2, 2),
+      DoublePoint.of(3, 0)
+    );
+
+    List<DoublePoint> output = LTThreeBuckets.sorted(input, input.size(), 2);
 
     assertThat(output, equalTo(input));
   }
 
   @Test
-  public void one_bucket_with_two_points_with_same_area_produces_the_first_point() {
-    List<Point> input = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(2, -1),
-      Point.of(3, 0)
-    );
-
-    List<Point> expectedOutput = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(3, 0)
-    );
-
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 1);
-
-    assertThat(actualOutput, equalTo(expectedOutput));
-  }
-
-  @Test
-  public void one_bucket_with_two_points_with_different_area_produces_the_point_that_generates_max_area() {
-    List<Point> input = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(2, 2),
-      Point.of(3, 0)
-    );
-
-    List<Point> expectedOutput = asList(
-      Point.of(0, 0),
-      Point.of(2, 2),
-      Point.of(3, 0)
-    );
-
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 1);
-
-    assertThat(actualOutput, equalTo(expectedOutput));
-  }
-
-  @Test
-  public void two_buckets_with_one_point_each() {
-    List<Point> input = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(2, 2),
-      Point.of(3, 0)
-    );
-
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 2);
-
-    assertThat(actualOutput, equalTo(input));
-  }
-
-  @Test
   public void two_buckets_non_full_middle_buckets() {
-    List<Point> input = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(2, 2),
-      Point.of(3, 1),
-      Point.of(4, 5)
+    List<DoublePoint> input = asList(
+      DoublePoint.of(0, 0),
+      DoublePoint.of(1, 1),
+      DoublePoint.of(2, 2),
+      DoublePoint.of(3, 1),
+      DoublePoint.of(4, 5)
     );
 
-    List<Point> expectedOutput = asList(
-      Point.of(0, 0),
-      Point.of(2, 2),
-      Point.of(3, 1),
-      Point.of(4, 5)
-    );
+    List<DoublePoint> output = LTThreeBuckets.sorted(input, input.size(), 2);
 
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 2);
-
-    assertThat(actualOutput, equalTo(expectedOutput));
+    assertThat(output, contains(
+      pointAt(0, 0),
+      pointAt(2, 2),
+      pointAt(3, 1),
+      pointAt(4, 5)
+    ));
   }
 
   @Test
   public void two_buckets_full_middle_buckets() {
-    List<Point> input = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(2, 3),
-      Point.of(3, 1),
-      Point.of(4, 3),
-      Point.of(5, 2),
-      Point.of(6, 0)
+    List<DoublePoint> input = asList(
+      DoublePoint.of(0, 0),
+      DoublePoint.of(1, 1),
+      DoublePoint.of(2, 3),
+      DoublePoint.of(3, 1),
+      DoublePoint.of(4, 3),
+      DoublePoint.of(5, 2),
+      DoublePoint.of(6, 0)
     );
 
-    List<Point> expectedOutput = asList(
-      Point.of(0, 0),
-      Point.of(2, 3),
-      Point.of(4, 3),
-      Point.of(6, 0)
-    );
+    List<DoublePoint> actualOutput = LTThreeBuckets.sorted(input, input.size(), 2);
 
-    List<Point> actualOutput = LTThreeBuckets.sorted(input, input.size(), 2);
-
-    assertThat(actualOutput, equalTo(expectedOutput));
+    assertThat(actualOutput, contains(
+      pointAt(0, 0),
+      pointAt(2, 3),
+      pointAt(4, 3),
+      pointAt(6, 0)
+    ));
   }
 
   @Test
   public void throws_when_more_buckets_than_posible() {
-    List<Point> input = asList(
-      Point.of(0, 0),
-      Point.of(1, 1),
-      Point.of(2, 0)
+    assertThrows(IllegalArgumentException.class, () ->
+      LTThreeBuckets.sorted(emptyList(), 3, 2)
     );
-    assertThrows(IllegalArgumentException.class, () -> LTThreeBuckets.sorted(input, input.size(), 2));
-  }
-
-  class DateSeriesPoint extends Point {
-    private final LocalDate date;
-    private final double value;
-
-    public DateSeriesPoint(LocalDate date, double value) {
-      super((double) date.atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), value);
-      this.date = date;
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return String.format("%s\t%s", date.format(DateTimeFormatter.ISO_DATE), value);
-    }
   }
 
   @Test
@@ -173,19 +151,19 @@ public class LargestTriangleThreeBucketsTest {
       .sorted(comparing(Point::getX))
       .collect(toList());
 
-    assertThat(LTThreeBuckets.sorted(series, 10), Matchers.contains(
-      new DateSeriesPoint(LocalDate.of(1979, 12, 31), Double.parseDouble("1.726")),
-      new DateSeriesPoint(LocalDate.of(1981, 8, 10), Double.parseDouble("2.571")),
-      new DateSeriesPoint(LocalDate.of(1982, 11, 8), Double.parseDouble("2.596")),
-      new DateSeriesPoint(LocalDate.of(1985, 2, 25), Double.parseDouble("3.453")),
-      new DateSeriesPoint(LocalDate.of(1985, 9, 18), Double.parseDouble("2.907")),
-      new DateSeriesPoint(LocalDate.of(1987, 12, 31), Double.parseDouble("1.571")),
-      new DateSeriesPoint(LocalDate.of(1991, 2, 11), Double.parseDouble("1.445")),
-      new DateSeriesPoint(LocalDate.of(1992, 9, 2), Double.parseDouble("1.391")),
-      new DateSeriesPoint(LocalDate.of(1995, 3, 7), Double.parseDouble("1.374")),
-      new DateSeriesPoint(LocalDate.of(1995, 4, 19), Double.parseDouble("1.357")),
-      new DateSeriesPoint(LocalDate.of(1997, 8, 5), Double.parseDouble("1.881")),
-      new DateSeriesPoint(LocalDate.of(1998, 12, 31), Double.parseDouble("1.667"))
+    assertThat(LTThreeBuckets.sorted(series, 10), contains(
+      pointAt(LocalDate.of(1979, 12, 31).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.726")),
+      pointAt(LocalDate.of(1981, 8, 10).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("2.571")),
+      pointAt(LocalDate.of(1982, 11, 8).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("2.596")),
+      pointAt(LocalDate.of(1985, 2, 25).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("3.453")),
+      pointAt(LocalDate.of(1985, 9, 18).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("2.907")),
+      pointAt(LocalDate.of(1987, 12, 31).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.571")),
+      pointAt(LocalDate.of(1991, 2, 11).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.445")),
+      pointAt(LocalDate.of(1992, 9, 2).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.391")),
+      pointAt(LocalDate.of(1995, 3, 7).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.374")),
+      pointAt(LocalDate.of(1995, 4, 19).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.357")),
+      pointAt(LocalDate.of(1997, 8, 5).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.881")),
+      pointAt(LocalDate.of(1998, 12, 31).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.667"))
     ));
   }
 }

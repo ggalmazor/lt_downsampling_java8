@@ -24,7 +24,9 @@ class Bucket<T extends Point> {
   static <U extends Point> Bucket<U> of(List<U> us) {
     U first = us.get(0);
     U last = us.get(us.size() - 1);
-    Point center = first.add(last.subtract(first).half());
+    DoublePoint vectorFromLastToFirst = Point.subtract(last, first);
+    DoublePoint halfVector = Point.half(vectorFromLastToFirst);
+    DoublePoint center = Point.add(first, halfVector);
     return new Bucket<>(us, first, last, center, first);
   }
 
