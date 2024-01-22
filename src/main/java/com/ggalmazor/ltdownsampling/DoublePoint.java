@@ -1,7 +1,5 @@
 package com.ggalmazor.ltdownsampling;
 
-import java.util.Objects;
-
 public class DoublePoint implements Point {
   private final double x;
   private final double y;

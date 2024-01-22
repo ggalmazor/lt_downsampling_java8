@@ -2,7 +2,6 @@ package com.ggalmazor.ltdownsampling;
 
 import java.time.LocalDate;
 import java.time.ZoneOffset;
-import java.util.Objects;
 
 public class DateSeriesPoint implements Point {
   private final LocalDate date;

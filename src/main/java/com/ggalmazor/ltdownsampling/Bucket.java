@@ -1,17 +1,17 @@
 package com.ggalmazor.ltdownsampling;
 
-import static java.util.stream.Collectors.toList;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
+
+import static java.util.stream.Collectors.toList;
 
 class Bucket<T extends Point> {
   private final List<T> data;
   private final T first;
   private final T last;
   private final Point center;
-  private T result = null;
+  private T result;
 
   private Bucket(List<T> data, T first, T last, Point center, T result) {
     this.data = data;
@@ -36,10 +36,6 @@ class Bucket<T extends Point> {
 
   T getResult() {
     return result;
-  }
-
-  void setResult(T result) {
-    this.result = result;
   }
 
   T getFirst() {

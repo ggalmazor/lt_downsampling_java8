@@ -138,6 +138,7 @@ public class LargestTriangleThreeBucketsTest {
     );
   }
 
+  @SuppressWarnings({"DataFlowIssue", "resource"})
   @Test
   public void complex_downsampling_scenario() throws URISyntaxException, IOException {
     URI uri = LTThreeBuckets.class.getResource("/daily-foreign-exchange-rates-31-.csv").toURI();
