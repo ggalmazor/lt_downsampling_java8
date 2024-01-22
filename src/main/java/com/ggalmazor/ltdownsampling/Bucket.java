@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+import static com.ggalmazor.ltdownsampling.Point.centerBetween;
 import static java.util.stream.Collectors.toList;
 
 class Bucket<T extends Point> {
@@ -24,7 +25,7 @@ class Bucket<T extends Point> {
   static <U extends Point> Bucket<U> of(List<U> us) {
     U first = us.get(0);
     U last = us.get(us.size() - 1);
-    DoublePoint center = Point.centerBetween(first, last);
+    DoublePoint center = centerBetween(first, last);
     return new Bucket<>(us, first, last, center, first);
   }
 
