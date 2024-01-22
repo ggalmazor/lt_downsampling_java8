@@ -5,24 +5,9 @@ public interface Point {
 
   double getY();
 
-  static DoublePoint add(Point a, Point b) {
-    return new DoublePoint(
-      a.getX() + b.getX(),
-      a.getY() + b.getY()
-    );
-  }
-
-  static DoublePoint subtract(Point a, Point b) {
-    return new DoublePoint(
-      a.getX() - b.getX(),
-      a.getY() - b.getY()
-    );
-  }
-
-  static DoublePoint half(Point p) {
-    return new DoublePoint(
-      p.getX() / 2,
-      p.getY() / 2
-    );
+  static DoublePoint centerBetween(Point a, Point b) {
+    DoublePoint vector = new DoublePoint(b.getX() - a.getX(), b.getY() - a.getY());
+    DoublePoint halfVector = new DoublePoint(((Point) vector).getX() / 2, ((Point) vector).getY() / 2);
+    return new DoublePoint(a.getX() + halfVector.getX(), a.getY() + halfVector.getY());
   }
 }
