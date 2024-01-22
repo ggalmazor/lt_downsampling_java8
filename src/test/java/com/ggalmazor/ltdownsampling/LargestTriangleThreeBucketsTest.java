@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.List;
 
 import static com.ggalmazor.ltdownsampling.PointMatcher.pointAt;
@@ -152,19 +151,21 @@ public class LargestTriangleThreeBucketsTest {
       .sorted(comparing(Point::getX))
       .collect(toList());
 
-    assertThat(LTThreeBuckets.sorted(series, 10), contains(
-      pointAt(LocalDate.of(1979, 12, 31).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.726")),
-      pointAt(LocalDate.of(1981, 8, 10).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("2.571")),
-      pointAt(LocalDate.of(1982, 11, 8).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("2.596")),
-      pointAt(LocalDate.of(1985, 2, 25).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("3.453")),
-      pointAt(LocalDate.of(1985, 9, 18).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("2.907")),
-      pointAt(LocalDate.of(1987, 12, 31).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.571")),
-      pointAt(LocalDate.of(1991, 2, 11).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.445")),
-      pointAt(LocalDate.of(1992, 9, 2).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.391")),
-      pointAt(LocalDate.of(1995, 3, 7).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.374")),
-      pointAt(LocalDate.of(1995, 4, 19).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.357")),
-      pointAt(LocalDate.of(1997, 8, 5).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.881")),
-      pointAt(LocalDate.of(1998, 12, 31).atStartOfDay().atOffset(ZoneOffset.UTC).toEpochSecond(), Double.parseDouble("1.667"))
+    List<DateSeriesPoint> output = LTThreeBuckets.sorted(series, 10);
+    List<LocalDate> selectedDatesInOutput = output.stream().map(DateSeriesPoint::getDate).collect(toList());
+    assertThat(selectedDatesInOutput, contains(
+      LocalDate.of(1979, 12, 31),
+      LocalDate.of(1981, 8, 10),
+      LocalDate.of(1982, 11, 8),
+      LocalDate.of(1985, 2, 25),
+      LocalDate.of(1985, 9, 18),
+      LocalDate.of(1987, 12, 31),
+      LocalDate.of(1991, 2, 11),
+      LocalDate.of(1992, 9, 2),
+      LocalDate.of(1995, 3, 7),
+      LocalDate.of(1995, 4, 19),
+      LocalDate.of(1997, 8, 5),
+      LocalDate.of(1998, 12, 31)
     ));
   }
 }

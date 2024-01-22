@@ -21,4 +21,8 @@ public class DateSeriesPoint implements Point {
   public double getY() {
     return value;
   }
+
+  public LocalDate getDate() {
+    return date;
+  }
 }
