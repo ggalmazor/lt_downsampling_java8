@@ -41,7 +41,11 @@ List<Point> output = LTThreeBuckets.ofSorted(input, numberOfBuckets);
 
 First and last points of the original series are always in the output. Then, the rest are grouped into the defined amount of buckets and the algorithm chooses the best point from each bucket, resulting in a list of 202 elements.
 
-You can translate your domain objects into Point instances and back or extend have your Domain extend Point to make things easier.
+## Notes on Point types
+
+- This library requires to provide lists of instances of the `Point` supertype.
+- It also provides and uses internally the `DoublePoint` subtype, which can also be used to feed data to the library.
+- However, users are free to create implementations of `Point` that best fit their Domain.
 
 ## Largest-Triangle Dynamic
 

@@ -20,7 +20,7 @@ public final class LTThreeBuckets {
       .stream()
       .map(Triangle::of)
       .forEach(triangle -> {
-        if (results.size() == 0)
+        if (results.isEmpty())
           results.add(triangle.getFirst());
 
         results.add(triangle.getResult());
