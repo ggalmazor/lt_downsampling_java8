@@ -28,7 +28,7 @@ jobs:
           cache: 'gradle'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Build with Gradle
+      - name: Publish with Gradle
         env:
           USERNAME: ggalmazor
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
