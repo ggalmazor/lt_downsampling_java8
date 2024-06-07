@@ -12,7 +12,11 @@ concurrency:
 jobs:
   update-gradle-wrapper:
     runs-on: ubuntu-latest
-
+    name: Java ${{ matrix.java-version }}
+    strategy:
+      matrix:
+        java-version:
+          - '11'
     steps:
       - uses: actions/checkout@v4
       - name: Update Gradle Wrapper
@@ -30,4 +34,3 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
-
