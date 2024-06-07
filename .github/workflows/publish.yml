@@ -29,4 +29,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
+        env:
+          USERNAME: ggalmazor
+          TOKEN: secrets.GITHUB_TOKEN
         run: ./gradlew publish
