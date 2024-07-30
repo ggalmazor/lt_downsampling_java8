@@ -11,16 +11,6 @@ Latest version: 0.1.0
 
 You can add this library into your Maven/Gradle/SBT/Leiningen project using a couple of source repositories
 
-### GithHub Package Repository
-
-Please follow the instructions at the [GitHub Package Repository for this project](https://github.com/ggalmazor/lt_downsampling_java8/packages). Gradle example:
-
-```groovy
-dependencies {
-  implementation 'com.github.ggalmazor:lt_downsampling_java8:0.1.0'
-}
-```
-
 ### JitPack.io
 
 Please follow the instructions at the [JitPack.io page for this project](https://jitpack.io/#ggalmazor/lt_downsampling_java8). Gradle example:
@@ -30,6 +20,28 @@ allprojects {
   repositories {
     maven { url 'https://jitpack.io' }
   }
+}
+
+dependencies {
+  implementation 'com.github.ggalmazor:lt_downsampling_java8:0.1.0'
+}
+```
+
+### GithHub Package Repository
+
+⚠️ Warning: Access to Maven repos hosted by GitHub requires authentication. More information at https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry. 
+
+Please follow the instructions at the [GitHub Package Repository for this project](https://github.com/ggalmazor/lt_downsampling_java8/packages). Gradle example:
+
+```groovy
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/ggalmazor/lt_downsampling_java")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+        }
+   }
 }
 
 dependencies {
