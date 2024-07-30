@@ -1,5 +1,5 @@
 # Largest-Triangle downsampling algorithm implementations for Java8
-[![](https://jitpack.io/v/ggalmazor/lt_downsampling_java8.svg)](https://jitpack.io/#ggalmazor/lt_downsampling_java8)
+[![](https://jitpack.io/v/ggalmazor/lt_downsampling_java8.svg)](https://jitpack.io/#ggalmazor/lt_downsampling_java8)</br>
 <a href="https://www.buymeacoffee.com/ggalmazor" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 
