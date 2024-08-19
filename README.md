@@ -7,6 +7,8 @@ These implementations are based on the paper *"Downsampling Time Series for Visu
 
 The goal of Largest-Triangle downsampling algorithms for data visualization is to reduce the number of points in a number series without losing important visual features of the resulting graph. It is important to be aware that **these algorithms are not numerically correct**.
 
+See how this algorithm compares to other algorithms designed to keep local extrema in the input series at [ggalmazor.com/blog/evaluating_downsampling_algorithms.html](https://ggalmazor.com/blog/evaluating_downsampling_algorithms.html)
+
 ## Download
 
 Latest version: 0.1.0
