@@ -1,7 +1,5 @@
 # Largest-Triangle downsampling algorithm implementations for Java8
 [![](https://jitpack.io/v/ggalmazor/lt_downsampling_java8.svg)](https://jitpack.io/#ggalmazor/lt_downsampling_java8)</br>
-<a href="https://www.buymeacoffee.com/ggalmazor" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
 
 These implementations are based on the paper *"Downsampling Time Series for Visual Representation"* by Sveinn Steinarsson from the Faculty of Industrial Engineering, Mechanical Engineering and Computer Science University of Iceland (2013). You can read the paper [here](http://skemman.is/stream/get/1946/15343/37285/3/SS_MSthesis.pdf)
 
