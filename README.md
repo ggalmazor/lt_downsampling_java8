@@ -1,6 +1,9 @@
 # Largest-Triangle downsampling algorithm implementations for Java8
 [![](https://jitpack.io/v/ggalmazor/lt_downsampling_java8.svg)](https://jitpack.io/#ggalmazor/lt_downsampling_java8)</br>
 
+> [!IMPORTANT]
+> This project has been superseded by https://github.com/ggalmazor/lttb_downsampling
+
 These implementations are based on the paper *"Downsampling Time Series for Visual Representation"* by Sveinn Steinarsson from the Faculty of Industrial Engineering, Mechanical Engineering and Computer Science University of Iceland (2013). You can read the paper [here](http://skemman.is/stream/get/1946/15343/37285/3/SS_MSthesis.pdf)
 
 The goal of Largest-Triangle downsampling algorithms for data visualization is to reduce the number of points in a number series without losing important visual features of the resulting graph. However, it is essential to know these algorithms are not numerically correct.
@@ -31,7 +34,7 @@ dependencies {
 
 ### GithHub Package Repository
 
-⚠️ Warning: Access to Maven repos hosted by GitHub requires authentication. More information at https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry. 
+⚠️ Warning: Access to Maven repos hosted by GitHub requires authentication. More information at https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry.
 
 Please follow the instructions at the [GitHub Package Repository for this project](https://github.com/ggalmazor/lt_downsampling_java8/packages). Gradle example:
 
