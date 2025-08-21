@@ -25,7 +25,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           labels: task, dependencies
       - name: Set up JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.java-version }}
           distribution: 'temurin'
