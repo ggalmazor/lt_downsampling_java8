@@ -2,7 +2,10 @@
 [![](https://jitpack.io/v/ggalmazor/lt_downsampling_java8.svg)](https://jitpack.io/#ggalmazor/lt_downsampling_java8)</br>
 
 > [!IMPORTANT]
-> This project has been superseded by https://github.com/ggalmazor/lttb_downsampling
+> This project has been superseded by
+> [**com.ggalmazor:downsampling**](https://github.com/ggalmazor/downsampling), which provides
+> LTTB alongside RDP and PIP under a unified API, targets modern Java (17/21/25), and is
+> published to Maven Central. This repository is no longer maintained.
 
 These implementations are based on the paper *"Downsampling Time Series for Visual Representation"* by Sveinn Steinarsson from the Faculty of Industrial Engineering, Mechanical Engineering and Computer Science University of Iceland (2013). You can read the paper [here](http://skemman.is/stream/get/1946/15343/37285/3/SS_MSthesis.pdf)
 
